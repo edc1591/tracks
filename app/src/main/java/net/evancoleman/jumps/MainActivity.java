@@ -19,18 +19,30 @@ import com.reconinstruments.ReconSDK.ReconRun;
 import com.reconinstruments.ReconSDK.ReconSpeed;
 
 public class MainActivity extends Activity implements IReconEventListener,IReconDataReceiver {
-    ArrayList<ReconJump> _jumps;
+    private JumpRowAdapter _jumpAdapter;
+    private int _runs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        _jumps = new ArrayList<ReconJump>();
+        _jumpAdapter = new JumpRowAdapter(this, 0);
+        ListView listview = (ListView)findViewById(R.id.JumpsList);
+        listview.setAdapter(_jumpAdapter);
+
+        _runs = 0;
+
+//        _jumpAdapter.add(new FakeJump());
+//        _jumpAdapter.add(new FakeJump());
+//        _jumpAdapter.add(new FakeJump());
+//        _jumpAdapter.add(new FakeJump());
+//        _jumpAdapter.add(new FakeJump());
 
         ReconSDKManager manager = ReconSDKManager.Initialize(getApplicationContext());
         try {
             manager.registerListener(this, ReconEvent.TYPE_JUMP);
+            manager.registerListener(this, ReconEvent.TYPE_RUN);
             manager.receiveData(this, ReconEvent.TYPE_RUN);
             manager.receiveData(this, ReconEvent.TYPE_JUMP);
         }
@@ -43,24 +55,25 @@ public class MainActivity extends Activity implements IReconEventListener,IRecon
     public void onDataChanged(ReconEvent event, java.lang.reflect.Method m) {
         if (event.getType() == ReconEvent.TYPE_JUMP) {
             ReconJump j = (ReconJump)event;
-            _jumps.add(j);
-            listview = (ListView)findViewById(R.id.JumpsList);
-            listview.setAdapter(new JumpRowAdapter(this, _jumps));
+           _jumpAdapter.add(j);
+        } else if (event.getType() == ReconEvent.TYPE_RUN) {
+            _runs++;
+            TextView t = (TextView)findViewById(R.id.Runs);
+            t.setText(_runs + " runs");
         }
     }
 
     @Override
     public void onReceiveCompleted(int status, ReconDataResult result) {
         if (result.arrItems.size() > 0) {
-            System.out.println(result.arrItems.get(0));
+//            System.out.println(result.arrItems.get(0));
             if (result.arrItems.get(0) instanceof ReconRun) {
+                _runs += result.arrItems.size();
                 TextView t = (TextView)findViewById(R.id.Runs);
-                t.setText(result.arrItems.size() + " runs");
+                t.setText(_runs + " runs");
             } else if (result.arrItems.get(0) instanceof ReconJump) {
-                _jumps.clear();
-                _jumps.addAll(result.arrItems);
-                listview = (ListView)findViewById(R.id.JumpsList);
-                listview.setAdapter(new JumpRowAdapter(this, _jumps));
+                _jumpAdapter.clear();
+                _jumpAdapter.addAll(result.arrItems);
             }
         }
     }

@@ -1,53 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/JumpTableLinearLayout">
+    android:id="@+id/JumpRow">
 
-    <TableLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/JumpNum" android:text="1"
+        android:layout_weight="1" android:background="#000000"
+        android:textColor="#ffffff"
+        android:padding="20dip" android:gravity="center"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/JumpTime" android:text="12:30 pm"
+        android:layout_weight="1" android:background="#000000"
+        android:textColor="#ffffff"
+        android:padding="20dip" android:gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/JumpTableLayout">
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/JumpNum"
+        android:layout_toEndOf="@+id/JumpNum" />
+    <TextView
+        android:id="@+id/JumpDist" android:text="10 ft"
+        android:layout_weight="1" android:background="#000000"
+        android:textColor="#ffffff"
+        android:padding="20dip" android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/JumpTime"
+        android:layout_toEndOf="@+id/JumpTime" />
+    <TextView
+        android:id="@+id/JumpHeight" android:text="3 ft"
+        android:layout_weight="1" android:background="#000000"
+        android:textColor="#ffffff"
+        android:padding="20dip" android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/JumpDist"
+        android:layout_toEndOf="@+id/JumpDist" />
+    <TextView
+        android:id="@+id/JumpDrop" android:text="4 ft"
+        android:layout_weight="1" android:background="#000000"
+        android:textColor="#ffffff"
+        android:padding="20dip" android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/JumpHeight"
+        android:layout_toEndOf="@+id/JumpHeight" />
+    <TextView
+        android:id="@+id/JumpAirTime" android:text="3 s"
+        android:layout_weight="1" android:background="#000000"
+        android:textColor="#ffffff"
+        android:padding="20dip" android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/JumpDrop"
+        android:layout_toEndOf="@+id/JumpDrop" />
 
-        <TableRow
-            android:id="@+id/JumpRow"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
-            <TextView
-                android:id="@+id/JumpNum" android:text="1"
-                android:layout_weight="1" android:background="#000000"
-                android:textColor="#ffffff"
-                android:padding="20dip" android:gravity="center" />
-            <TextView
-                android:id="@+id/JumpTime" android:text="12:30 pm"
-                android:layout_weight="1" android:background="#000000"
-                android:textColor="#ffffff"
-                android:padding="20dip" android:gravity="center"/>
-            <TextView
-                android:id="@+id/JumpDist" android:text="10 ft"
-                android:layout_weight="1" android:background="#000000"
-                android:textColor="#ffffff"
-                android:padding="20dip" android:gravity="center"/>
-            <TextView
-                android:id="@+id/JumpHeight" android:text="3 ft"
-                android:layout_weight="1" android:background="#000000"
-                android:textColor="#ffffff"
-                android:padding="20dip" android:gravity="center"/>
-            <TextView
-                android:id="@+id/JumpDrop" android:text="4 ft"
-                android:layout_weight="1" android:background="#000000"
-                android:textColor="#ffffff"
-                android:padding="20dip" android:gravity="center"/>
-            <TextView
-                android:id="@+id/JumpAirTime" android:text="3 s"
-                android:layout_weight="1" android:background="#000000"
-                android:textColor="#ffffff"
-                android:padding="20dip" android:gravity="center"/>
-        </TableRow>
 
-    </TableLayout>
-
-
-</LinearLayout>
+</RelativeLayout>
