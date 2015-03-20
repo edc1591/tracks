@@ -38,7 +38,7 @@ public class JumpRowAdapter extends ArrayAdapter<ReconEvent> {
         ReconJump j = (ReconJump)getItem(position);
 
         numText.setText((position + 1) + "");
-        timeText.setText(_dateFormatter.format(new java.util.Date(j.GetDate())));
+        timeText.setText(_dateFormatter.format(new java.util.Date(j.GetDate() * 1000)));
         distText.setText(java.lang.Math.round(j.GetDistance() * 3.28084) + " ft");
         heightText.setText(java.lang.Math.round(j.GetHeight() * 3.28084) + " ft");
         dropText.setText(java.lang.Math.round(j.GetDrop() * 3.28084) + " ft");
